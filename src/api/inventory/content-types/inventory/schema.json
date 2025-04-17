@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inventories",
+  "info": {
+    "singularName": "inventory",
+    "pluralName": "inventories",
+    "displayName": "Inventory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "size": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "inventories"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "orderId": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "total_price": {
+      "type": "decimal"
+    },
+    "status_order": {
+      "type": "string"
+    },
+    "address_shipping": {
+      "type": "text"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    },
+    "shipping_status": {
+      "type": "enumeration",
+      "enum": [
+        "PREPARING",
+        "PICKED_UP",
+        "SHIPPING",
+        "DELIVERING",
+        "DELIVERED"
+      ]
+    }
+  }
+}

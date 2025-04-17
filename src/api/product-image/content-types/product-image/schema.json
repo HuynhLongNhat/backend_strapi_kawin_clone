@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_images",
+  "info": {
+    "singularName": "product-image",
+    "pluralName": "product-images",
+    "displayName": "ProductImage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "img": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "ListImg": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "product_images"
+    },
+    "color": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ratings",
+  "info": {
+    "singularName": "rating",
+    "pluralName": "ratings",
+    "displayName": "Rating"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "rating": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "text"
+    },
+    "img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "ratings"
+    },
+    "username": {
+      "type": "string"
+    }
+  }
+}

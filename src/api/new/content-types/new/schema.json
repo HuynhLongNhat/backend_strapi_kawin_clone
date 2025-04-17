@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news",
+  "info": {
+    "singularName": "new",
+    "pluralName": "news",
+    "displayName": "News"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "slug": {
+      "type": "string"
+    },
+    "introduction": {
+      "type": "text"
+    },
+    "is_block": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "blocks"
+    }
+  }
+}
