@@ -4,7 +4,8 @@
   "info": {
     "singularName": "new",
     "pluralName": "news",
-    "displayName": "News"
+    "displayName": "news",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,26 +15,38 @@
       "type": "string"
     },
     "img": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": true
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images", "files"]
     },
     "slug": {
       "type": "string"
+    },
+    "description": {
+      "type": "blocks"
     },
     "introduction": {
       "type": "text"
     },
     "is_block": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": true
     },
-    "description": {
-      "type": "blocks"
+    "rating_news": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::rating-new.rating-new",
+      "mappedBy": "news"
+    },
+    "views": {
+      "type": "integer"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "news"
     }
   }
 }

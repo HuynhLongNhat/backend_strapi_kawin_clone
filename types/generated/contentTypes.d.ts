@@ -469,7 +469,8 @@ export interface ApiInventoryInventory extends Struct.CollectionTypeSchema {
 export interface ApiNewNew extends Struct.CollectionTypeSchema {
   collectionName: 'news';
   info: {
-    displayName: 'News';
+    description: '';
+    displayName: 'news';
     pluralName: 'news';
     singularName: 'new';
   };
@@ -481,18 +482,27 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks;
-    img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    img: Schema.Attribute.Media<'images' | 'files', true>;
     introduction: Schema.Attribute.Text;
-    is_block: Schema.Attribute.Boolean;
+    is_block: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::new.new'> &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    rating_news: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::rating-new.rating-new'
+    >;
     slug: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_permissions_users: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    views: Schema.Attribute.Integer;
   };
 }
 
@@ -542,7 +552,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address_shipping: Schema.Attribute.Text;
+    address_shipping: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -554,9 +564,6 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     orderId: Schema.Attribute.String;
     phone_number: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    shipping_status: Schema.Attribute.Enumeration<
-      ['PREPARING', 'PICKED_UP', 'SHIPPING', 'DELIVERING', 'DELIVERED']
-    >;
     status_order: Schema.Attribute.String;
     total_price: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
@@ -743,6 +750,38 @@ export interface ApiRatingRating extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     username: Schema.Attribute.String;
+  };
+}
+
+export interface ApiShippingShipping extends Struct.CollectionTypeSchema {
+  collectionName: 'shippings';
+  info: {
+    displayName: 'shipping';
+    pluralName: 'shippings';
+    singularName: 'shipping';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::shipping.shipping'
+    > &
+      Schema.Attribute.Private;
+    order: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    shipping_date: Schema.Attribute.DateTime;
+    shipping_status: Schema.Attribute.Enumeration<
+      ['PREPARING', 'PICKED_UP', 'SHIPPING', 'DELIVERING', 'DELIVERED']
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1227,6 +1266,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1277,6 +1317,7 @@ declare module '@strapi/strapi' {
       'api::product-sale.product-sale': ApiProductSaleProductSale;
       'api::product.product': ApiProductProduct;
       'api::rating.rating': ApiRatingRating;
+      'api::shipping.shipping': ApiShippingShipping;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

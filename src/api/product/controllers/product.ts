@@ -13,17 +13,19 @@ export default factories.createCoreController(
 
       // Nếu có tham số `query`, thực hiện tìm kiếm
       if (query) {
-        const products = await strapi.documents("api::product.product").findMany({
-          filters: {
-            name: {
-              $containsi: query, // Case-insensitive search
+        const products = await strapi
+          .documents("api::product.product")
+          .findMany({
+            filters: {
+              name: {
+                $contains: query, // Case-insensitive search
+              },
             },
-          },
-          populate: {
-            Image: true, // Lấy hình ảnh của sản phẩm (Đổi 'image' thành tên đúng trong database của bạn)
-          },
-          limit: 5,
-        });
+            populate: {
+              Image: true, // Lấy hình ảnh của sản phẩm (Đổi 'image' thành tên đúng trong database của bạn)
+            },
+            limit: 5,
+          });
 
         return products;
       }

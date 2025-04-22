@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shippings",
+  "info": {
+    "singularName": "shipping",
+    "pluralName": "shippings",
+    "displayName": "shipping"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "shipping_status": {
+      "type": "enumeration",
+      "enum": [
+        "PREPARING",
+        "PICKED_UP",
+        "SHIPPING",
+        "DELIVERING",
+        "DELIVERED"
+      ]
+    },
+    "shipping_date": {
+      "type": "datetime"
+    },
+    "order": {
+      "type": "string"
+    }
+  }
+}

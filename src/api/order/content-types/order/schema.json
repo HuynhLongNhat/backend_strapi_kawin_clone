@@ -24,23 +24,13 @@
       "type": "string"
     },
     "address_shipping": {
-      "type": "text"
+      "type": "string"
     },
     "phone_number": {
       "type": "string"
     },
     "note": {
       "type": "text"
-    },
-    "shipping_status": {
-      "type": "enumeration",
-      "enum": [
-        "PREPARING",
-        "PICKED_UP",
-        "SHIPPING",
-        "DELIVERING",
-        "DELIVERED"
-      ]
     }
   }
 }
