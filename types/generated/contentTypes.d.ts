@@ -721,6 +721,37 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiRatingNewRatingNew extends Struct.CollectionTypeSchema {
+  collectionName: 'rating_news';
+  info: {
+    description: '';
+    displayName: 'RatingNews';
+    pluralName: 'rating-news';
+    singularName: 'rating-new';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::rating-new.rating-new'
+    > &
+      Schema.Attribute.Private;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
+    publishedAt: Schema.Attribute.DateTime;
+    rating: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.String;
+  };
+}
+
 export interface ApiRatingRating extends Struct.CollectionTypeSchema {
   collectionName: 'ratings';
   info: {
@@ -1316,6 +1347,7 @@ declare module '@strapi/strapi' {
       'api::product-image.product-image': ApiProductImageProductImage;
       'api::product-sale.product-sale': ApiProductSaleProductSale;
       'api::product.product': ApiProductProduct;
+      'api::rating-new.rating-new': ApiRatingNewRatingNew;
       'api::rating.rating': ApiRatingRating;
       'api::shipping.shipping': ApiShippingShipping;
       'plugin::content-releases.release': PluginContentReleasesRelease;

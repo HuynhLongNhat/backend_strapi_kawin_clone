@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rating_news",
+  "info": {
+    "singularName": "rating-new",
+    "pluralName": "rating-news",
+    "displayName": "RatingNews",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "news": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::new.new",
+      "inversedBy": "rating_news"
+    }
+  }
+}
